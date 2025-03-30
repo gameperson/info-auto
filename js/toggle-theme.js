@@ -23,10 +23,17 @@ function toggleTheme() {
 // Sync theme on page load
 window.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
+    
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
     }
 
-    // Update icons after applying theme
-    toggleTheme(); 
+    // Ensure icons update without triggering a theme toggle
+    const isLight = document.body.classList.contains('light-theme');
+    const icons = document.querySelectorAll('.theme-icon');
+
+    icons.forEach(icon => {
+        icon.src = isLight ? '/assets/images/bulb_black.png' : '/assets/images/bulb_white.png';
+        icon.alt = isLight ? 'Light Mode Icon' : 'Dark Mode Icon';
+    });
 });
