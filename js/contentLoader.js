@@ -1,29 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
-    loadArticles("pages/articles.json", "article-container");
-});
+// contentLoader.js - Handles Markdown and JSON content loading
 
-function loadArticles(jsonFile, containerId) {
-    fetch(jsonFile)
-        .then(response => response.json())
-        .then(data => {
-            let container = document.getElementById(containerId);
-            container.innerHTML = "";  // Clear previous content
+async function loadContent(page) {
+    let contentPath = `pages/${page}.md`;
+    let response = await fetch(contentPath);
+    let content = await response.text();
+    
+    document.getElementById("content").innerHTML = markdownToHtml(content);
+}
 
-            fetch("templates/article_template.html")
-                .then(response => response.text())
-                .then(template => {
-                    data.forEach(article => {
-                        let articleElement = document.createElement("div");
-                        articleElement.innerHTML = template;
-                        articleElement.querySelector("#article-title").textContent = article.title;
-                        articleElement.querySelector("#article-author").textContent = article.author;
-                        articleElement.querySelector("#article-date").textContent = article.date;
-                        articleElement.querySelector("#article-content").innerHTML = article.content;
-
-                        container.appendChild(articleElement);
-                    });
-                })
-                .catch(error => console.error(`Error loading template:`, error));
-        })
-        .catch(error => console.error(`Error loading ${jsonFile}:`, error));
+// Basic Markdown conversion (Placeholder - replace with a library like marked.js)
+function markdownToHtml(markdown) {
+    return markdown.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 }
