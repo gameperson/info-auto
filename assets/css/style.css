@@ -1,0 +1,156 @@
+/* ============================================================
+   Global Stylesheet for Info-Auto
+   ============================================================ */
+
+/* ============================================================
+   1. RESET & BASE STYLES
+   ============================================================ */
+
+/* Reset Box Model and Margins */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base HTML and Body Styles */
+html {
+    font-size: 16px; /* 1rem = 16px */
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+    line-height: 1.7;
+    padding: 20px; /* 20px */
+    background-color: #f4f4f4; /* Default background */
+    color: #333; /* Default text color */
+}
+
+/* ============================================================
+   2. COLOR PALETTE TOKENS (CSS Variables)
+   ============================================================ */
+
+:root {
+    --color-background-light: #ffffff;
+    --color-background-dark: #f0f0f0;
+    --color-text-primary: #333;
+    --color-link-primary: #0066cc;
+    --color-link-hover: #004d99;
+    --color-border: #ccc;
+}
+
+/* Apply Background and Text Colors based on theme */
+body {
+    background-color: var(--color-background-light);
+    color: var(--color-text-primary);
+}
+
+/* ============================================================
+   3. TYPOGRAPHY 
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text-primary);
+    margin: 1em 0;
+    text-align: center;
+}
+
+h1 { font-size: 2.5rem; font-weight: bold; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+
+/* Paragraphs */
+p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+/* Links */
+a {
+    color: var(--color-link-primary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--color-link-hover);
+}
+
+/* List Styles */
+ul, ol {
+    padding-left: 20px; 
+    margin: 1em 0;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Tables */
+table {
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 1.5em 0; 
+}
+
+th, td {
+    border: 1px solid var(--color-border);
+    padding: 12px;
+    text-align: left;
+}
+
+/* ============================================================
+   4. LAYOUT & CONTAINERS 
+   ============================================================ */
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+.header, .footer {
+    background-color: var(--color-background-dark);
+    color: white;
+    text-align: center; 
+    padding: 1em; 
+}
+
+/* ============================================================
+   5. BUTTONS 
+   ============================================================ */
+
+.btn, .btn-link {
+    background-color: var(--color-background-dark);
+    color: white;
+    padding: 0.7em 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.btn:hover, .btn-link:hover {
+    background-color: var(--color-link-hover);
+}
+
+/* ============================================================
+   6. RESPONSIVE DESIGN 
+   ============================================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.5em; }
+}
