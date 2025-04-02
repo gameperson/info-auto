@@ -1,39 +1,34 @@
-// toggle-theme.js
+// toggle-theme.js - Handles dark/light mode switching
 
-function toggleTheme() {
-    // Toggle the light theme class
-    document.body.classList.toggle('light-theme');
+document.addEventListener("DOMContentLoaded", function () {
+    initializeThemeSwitcher();
+});
 
-    // Check the current theme
-    const isLight = document.body.classList.contains('light-theme');
+function initializeThemeSwitcher() {
+    const themeToggle = document.getElementById("theme-toggle");
+    const storedTheme = localStorage.getItem("theme") || "light";
 
-    // Get all theme icons
-    const icons = document.querySelectorAll('.theme-icon');
+    // Apply stored theme
+    document.documentElement.setAttribute("data-theme", storedTheme);
 
-    // Update icons based on theme
-    icons.forEach(icon => {
-        icon.src = isLight ? '/assets/images/bulb_black.png' : '/assets/images/bulb_white.png';
-        icon.alt = isLight ? 'Light Mode Icon' : 'Dark Mode Icon';
-    });
+    // Update toggle button text/icon
+    updateToggleButton(themeToggle, storedTheme);
 
-    // Store the user's preference
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    // Toggle theme on button click
+    if (themeToggle) {
+        themeToggle.addEventListener("click", function () {
+            const currentTheme = document.documentElement.getAttribute("data-theme");
+            const newTheme = currentTheme === "light" ? "dark" : "light";
+
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+            updateToggleButton(themeToggle, newTheme);
+        });
+    }
 }
 
-// Sync theme on page load
-window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-theme');
-    }
-
-    // Ensure icons update without triggering a theme toggle
-    const isLight = document.body.classList.contains('light-theme');
-    const icons = document.querySelectorAll('.theme-icon');
-
-    icons.forEach(icon => {
-        icon.src = isLight ? '/assets/images/bulb_black.png' : '/assets/images/bulb_white.png';
-        icon.alt = isLight ? 'Light Mode Icon' : 'Dark Mode Icon';
-    });
-});
+// Updates the toggle button appearance
+function updateToggleButton(button, theme) {
+    if (!button) return;
+    button.textContent = theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode";
+}
