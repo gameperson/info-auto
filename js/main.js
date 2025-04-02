@@ -1,16 +1,22 @@
-// main.js - Handles loading templates and basic page setup
+// main.js - Handles loading templates and setting up the page
 
 document.addEventListener("DOMContentLoaded", function () {
     loadTemplate("header", "templates/header.html");
     loadTemplate("footer", "templates/footer.html");
     loadTemplate("meta", "templates/meta.html", true);
 
-    // Load dynamic content if applicable
+    // Load content dynamically if a page-specific dataset is present
     if (document.body.dataset.page) {
         loadContent(document.body.dataset.page);
     }
+
+    // Initialize theme switcher
+    if (typeof initializeThemeSwitcher === "function") {
+        initializeThemeSwitcher();
+    }
 });
 
+// Function to load an HTML template into a specified element
 function loadTemplate(targetId, templatePath, insertBefore = false) {
     fetch(templatePath)
         .then(response => response.text())
