@@ -1,5 +1,5 @@
 function loadContent(fileType, fileName) {
-    const contentDiv = document.getElementById('content');
+    const contentDiv = document.getElementById('article-content');
     contentDiv.innerHTML = 'Loading...';
     const filePath = `pages/${fileName}.${fileType}`;
 
@@ -7,7 +7,12 @@ function loadContent(fileType, fileName) {
         .then(response => response.text())
         .then(data => {
             if (filePath.endsWith('.md')) {
-                contentDiv.innerHTML = marked.parse(data); // Requires marked.js
+                try {
+                    contentDiv.innerHTML = marked.parse(data);
+                } catch (error) {
+                    console.error('Error parsing markdown:', error);
+                    contentDiv.innerHTML = '<p>Error parsing markdown.</p>';
+                }
             } else if (filePath.endsWith('.txt')) {
                 contentDiv.innerHTML = `<pre>${data}</pre>`;
             } else {
