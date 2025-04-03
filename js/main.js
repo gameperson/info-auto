@@ -62,7 +62,8 @@ function loadArticles() {
                     const link = document.createElement('a');
                     link.href = '#';
                     link.textContent = article.title;
-                    link.addEventListener('click', () => {
+                    link.addEventListener('click', (event) => {
+                        event.preventDefault(); // Prevent default behavior
                         loadContent(article.fileType, article.fileName);
                     });
                     listItem.appendChild(link);
@@ -90,12 +91,14 @@ function loadPageList() {
         const link = document.createElement('a');
         link.href = '#';
         link.textContent = page.title;
-        link.addEventListener('click', () => loadPage(page.fileName));
+        link.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent default behavior
+            loadPage(page.fileName);
+        });
         listItem.appendChild(link);
         pageListItems.appendChild(listItem);
     });
 }
-
 function loadPage(fileName) {
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = 'Loading...';
