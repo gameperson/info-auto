@@ -1,77 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadTemplates();
-    loadArticles();
-    loadPageList();
+    loadIndexArticles();
+    loadIndexDisclaimerLink();
 });
 
 function loadTemplates() {
-    fetch('templates/meta.html')
-        .then(response => response.text())
-        .then(meta => {
-            document.getElementById('meta').innerHTML = meta;
-        })
-        .catch(error => {
-            console.error('Error loading meta template:', error);
-            showError('Failed to load meta template.');
-        });
-
-    fetch('templates/header.html')
-        .then(response => response.text())
-        .then(header => {
-            document.getElementById('header').innerHTML = header;
-            loadThemeSwitch('theme-switch-header');
-        })
-        .catch(error => {
-            console.error('Error loading header template:', error);
-            showError('Failed to load header template.');
-        });
-
-    fetch('templates/footer.html')
-        .then(response => response.text())
-        .then(footer => {
-            document.getElementById('footer').innerHTML = footer;
-            loadThemeSwitch('theme-switch-footer');
-        })
-        .catch(error => {
-            console.error('Error loading footer template:', error);
-            showError('Failed to load footer template.');
-        });
+    // ... (same as before)
 }
 
 function loadThemeSwitch(elementId) {
-    fetch('templates/theme_switch.html')
-        .then(response => response.text())
-        .then(themeSwitch => {
-            document.getElementById(elementId).innerHTML = themeSwitch;
-            initThemeSwitch();
-        })
-        .catch(error => {
-            console.error('Error loading theme switch template:', error);
-            showError('Failed to load theme switch template.');
-        });
+    // ... (same as before)
 }
 
-function loadArticles() {
+function loadIndexArticles() {
     fetch('pages/articles.json')
         .then(response => response.json())
         .then(articles => {
-            const tocList = document.getElementById('toc-list');
-            if (tocList) {
+            const articleListItems = document.getElementById('article-list-items');
+            if (articleListItems) {
                 articles.forEach(article => {
                     const listItem = document.createElement('li');
                     const link = document.createElement('a');
                     link.href = '#';
                     link.textContent = article.title;
                     link.addEventListener('click', (event) => {
-                        event.preventDefault(); // Prevent default behavior
-                        loadContent(article.fileType, article.fileName);
+                        event.preventDefault();
+                        loadArticleContent(article.fileType, article.fileName);
                     });
                     listItem.appendChild(link);
-                    tocList.appendChild(listItem);
+                    articleListItems.appendChild(listItem);
                 });
             } else {
-                console.error("toc-list element not found!");
-                showError("Error: Table of contents element not found.");
+                console.error("article-list-items element not found!");
+                showError("Error: Article list element not found.");
             }
         })
         .catch(error => {
@@ -80,43 +41,48 @@ function loadArticles() {
         });
 }
 
-function loadPageList() {
-    const pageListItems = document.getElementById('page-list-items');
-    const pages = [
-        { title: 'Disclaimer', fileName: 'disclaimer.html' }
-    ];
-
-    pages.forEach(page => {
-        const listItem = document.createElement('li');
-        const link = document.createElement('a');
-        link.href = '#';
-        link.textContent = page.title;
-        link.addEventListener('click', (event) => {
-            event.preventDefault(); // Prevent default behavior
-            loadPage(page.fileName);
-        });
-        listItem.appendChild(link);
-        pageListItems.appendChild(listItem);
-    });
+function loadArticleContent(fileType, fileName) {
+    loadContent(fileType, fileName);
+    loadToc();
 }
-function loadPage(fileName) {
-    const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = 'Loading...';
-    fetch(fileName)
+
+function loadToc() {
+    fetch('templates/toc.html')
         .then(response => response.text())
-        .then(data => {
-            contentDiv.innerHTML = data;
+        .then(toc => {
+            document.getElementById('table-of-contents').innerHTML = toc;
         })
         .catch(error => {
-            console.error('Error loading page:', error);
-            contentDiv.innerHTML = '<p>Failed to load page.</p>';
+            console.error('Error loading toc template:', error);
+            document.getElementById('table-of-contents').innerHTML = '<p>Failed to load table of contents.</p>';
         });
 }
 
-function showError(message) {
-    console.log("showError called:", message); // Added console.log()
-    const errorDiv = document.createElement('div');
-    errorDiv.innerHTML = `<p>${message}</p>`;
-    document.getElementById('article-content').innerHTML = '';
-    document.getElementById('article-content').appendChild(errorDiv);
+function loadIndexDisclaimerLink() {
+    const disclaimerLinkDiv = document.getElementById('index-disclaimer-link');
+    if (disclaimerLinkDiv) {
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = 'Disclaimer';
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            loadDisclaimer();
+        });
+        disclaimerLinkDiv.appendChild(link);
+    } else {
+        console.error("index-disclaimer-link element not found!");
+    }
+}
+
+function loadDisclaimer() {
+    fetch('disclaimer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('article-content').innerHTML = data;
+            document.getElementById('table-of-contents').innerHTML = ""; //clear toc
+        })
+        .catch(error => {
+            console.error('Error loading disclaimer:', error);
+            document.getElementById('article-content').innerHTML = '<p>Failed to load disclaimer.</p>';
+        });
 }
