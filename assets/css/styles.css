@@ -15,7 +15,7 @@ html {
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
     line-height: 1.7;
-    padding: 20px; /* 20px */
+    padding: 20px;
     background-color: #f4f4f4; /* Default background */
     color: #333; /* Default text color */
 }
