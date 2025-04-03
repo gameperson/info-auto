@@ -581,7 +581,7 @@ footer .site-nav li a {
 
 /* Ensure headings stay centered */
 .return-link h3, .disclaimer-link h3, .contact-link h3, .return-list-link h3 {
-    text-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
     text-align: center;
     text-align-last: center;
 }
