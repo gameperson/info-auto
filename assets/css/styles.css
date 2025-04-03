@@ -21,8 +21,9 @@ body {
 }
 
 /* ---------------------------- // ---------------------------- */
+/*
 :root {
-    /* DARK THEME (Default) */
+    /* DARK THEME (Default) 
     --color-background-light: #121212;
     --color-background-medium: #1e1e1e;
     --color-background-dark: #333;
@@ -35,7 +36,7 @@ body {
 }
 
 .light-theme {
-    /* LIGHT THEME */
+    /* LIGHT THEME 
     --color-background-light: #b0b8bf;
     --color-background-medium: #a8b0b8;
     --color-background-dark: #98a0a8;
@@ -48,19 +49,11 @@ body {
     --color-border-primary: #c0c3c6;
 }
 
-/* Apply Background and Text Colors based on theme */
-body {
-    background-color: var(--color-background-light);
-    color: var(--color-text-primary);
-    /* border-color: var(--color-border-primary);
-*/
-}
-
-/* Light Theme Color Accents */
+/* Light Theme Color Accents 
 .light-theme h1, .light-theme h2, .light-theme h3,
 .light-theme h4, .light-theme h5, .light-theme h6,
 .light-theme a {
-    color: var(--color-link-primary); /* Teal Headers and links */
+    color: var(--color-link-primary);
 }
 
 .light-theme a:hover {
@@ -68,13 +61,13 @@ body {
 }
 
 .light-theme .highlighted-section {
-    background-color: #d0d8dd; /* Darker background for contrast */
-    border-color: var(--color-link-primary); /* Teal border */
+    background-color: #d0d8dd; 
+    border-color: var(--color-link-primary); 
 }
 
 .light-theme .highlighted-section a.btn-link,
 .btn-link {
-    /* Button Styles, applies to both themes */
+    /* Button Styles, applies to both themes 
     display: block;
     padding: 0.8em 1.2em;
     background-color: var(--color-background-medium);
@@ -91,8 +84,9 @@ body {
 }
 
 /* ---------------------------- // ---------------------------- */
+/*
 :root {
-    /* Font Families and Sizes */
+    /* Font Families and Sizes 
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
     
     --font-size-base: 1rem;
@@ -100,13 +94,13 @@ body {
     --font-size-medium: 1.1rem;
     --font-size-large: 1.25rem;
 
-    /* Font Weights */
+    /* Font Weights 
     --font-weight-normal: 400;
     --font-weight-ligbt: 300;
     --font-weight-semibold: 500;
     --font-weight-bold: 600;
 
-    /* Spacing (Margins, Padding) */
+    /* Spacing (Margins, Padding) 
     --margin-base: 1em;
     --margin-small: 0.5em;
     --margin-large: 1.5em;
@@ -118,7 +112,7 @@ body {
     --padding-large: 1.5em;
     --padding-none: 0;
 
-    /* Borders and Line Heights */
+    /* Borders and Line Heights 
     --border-radius-base: 5px;
     --border-radius-small: 4px;
     
@@ -128,70 +122,76 @@ body {
 }
 
 /* ---------------------------- // ---------------------------- */
+:root {
+    /* Colors */
+    --color-background: #f5f5f5;
+    --color-text: #333333;
+    --color-accent: #007BFF;
+    --color-accent-hover: #0056b3;
+    --color-highlight: #ffcc00;
+    --color-border: #dddddd;
+
+    /* Typography */
+    --font-family-base: 'Arial', sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.5;
+
+    /* Spacing */
+    --spacing-small: 8px;
+    --spacing-medium: 16px;
+    --spacing-large: 24px;
+    --spacing-xlarge: 32px;
+
+    /* Border Radius */
+    --border-radius: 4px;
+}
+
+/* Base Styles (Global Defaults) */
 body {
-    font-family: var(--font-family);
+    font-family: var(--font-family-base);
     font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    margin: var(--margin-base);
-    border-radius: var(--border-radius-base);
-    padding: var(--padding-base);
     line-height: var(--line-height-base);
-    text-align: left;
-    text-align-last: left;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    margin: 0;
+    padding: 0;
 }
 
-/* Headings */
 h1, h2, h3, h4, h5, h6 {
-    color: var(--color-text-primary);
-    margin: var(--margin-base);
-    padding: var(--padding-none);
-    line-height: var(--line-height-smaller);
-    font-weight: var(--font-weight-semibold);
-    text-align: center;
-    text-align-last: center;
+    margin-top: var(--spacing-large);
+    margin-bottom: var(--spacing-medium);
 }
 
-h3 { font-size: 1.75rem; }
-
-h1 { font-size: 2.5rem; font-weight: var(--font-weight-bold); margin: var(--margin-small); }
-h2 { font-size: 2.0em; font-weight: var(--font-weight-semibold); margin-bottom: 0.5em; }
-h3 { font-size: 1.75em; font-weight: var(--font-weight-semibold); margin-bottom: 0.5em; }
-h4, h5 { font-size: 1.5em; margin: var(--margin-small); }
-h4 font-weight: var(--font-weight-bold); 
-h5 font-weight: var(--font-weight-semibold); 
-h6 { font-size: 1.25em; font-weight: var(--font-weight-semibold); margin: var(--margin-small); }
-
-/* Paragraphs and Lists */
-p, ul, ol, li, table, dl { 
-    margin-bottom: var(--margin-base);
-    line-height: var(--line-height-base);
-    text-align: justify; 
-    text-align-last: left; 
+p {
+    margin-bottom: var(--spacing-medium);
 }
 
-/* Links */
 a {
-    color: var(--color-link-primary);
+    color: var(--color-accent);
     text-decoration: none;
-    display: inline-block; /* or 'block' */
-    padding: 10px 15px; /* Adjust values as needed */
-    transition: color 0.3s;
 }
 
 a:hover {
-    color: var(--color-link-hover);
+    color: var(--color-accent-hover);
 }
 
-/* List Styles */
 ul, ol {
-   list-style: none; 
-   padding-left: var(--padding-small); 
-   margin: var(--margin-base) 0; 
+    margin-bottom: var(--spacing-medium);
+    padding-left: var(--spacing-large);
 }
 
-ul li, ol li { margin-bottom: var(--margin-small); }
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+}
+
+/* Image 
+.icon { background-image: url('/resources/images/bulb.0.png'); }*/
+/*
 
 /* Tables */
+/*
 table {
     background-color: var(--color-background-medium);
     width: 100%;
@@ -210,6 +210,7 @@ th, td {
 }
 
 /* Code Blocks */
+/*
 pre, code {
     background: var(--color-background-medium); 
     padding: var(--padding-base);
@@ -218,9 +219,6 @@ pre, code {
     font-family: monospace;
     margin-bottom: var(--margin-base);
 }
-
-/* Images */
-.icon { background-image: url('/resources/images/bulb.0.png'); }
 
 img {
     max-width: 100px;
@@ -235,7 +233,8 @@ figcaption {
     text-align-last: center;
 }
 
-/* ---------------------------- // ---------------------------- */
+/* ---------------------------- // ----------------------------  */
+/*
 .left { text-align: left; text-align-last: left; }
 .right { text-align: right; text-align-last: right; }
 .center { text-align: center; text-align-kast: center; }
@@ -267,507 +266,119 @@ figcaption {
 }
 
 /* ---------------------------- // ---------------------------- */
-.btn, .btn-link {
-    background-color: var(--color-background-dark);
-    color: var(--color-text-primary);
-    display: block;
-    margin: var(--margin-base) auto;
-    border: 1px solid var(--color-border-primary);
-    border-radius: var(--border-radius-base);
-    padding: var(--padding-large);
-    text-decoration: none;
-    font-weight: var(--font-weight-normal);
-    text-align: center;
-    text-align-last: center;
-    transition: background 0.3s ease;
-}
-
-.btn:hover, .btn-link:hover {
-    background: var(--color-background-darker);
-}
-
-/* Smaller nav Buttons */
-.nav .btn, .nav .btn-link, .btn-toc {
-    font-size: var(--font-size-small);
+.button {
     display: inline-block;
-    padding: var(--padding-smaller);
-    margin: var(--margin-smaller);
-}
-   
-/* Large Button */
-.btn.large, .btn-link.large { /* Combined .btn.large and .btn-link.large */
+    font-family: var(--font-family-base);
     font-size: var(--font-size-base);
-    margin: var(--margin-large) auto;
-    padding: var(--padding-base);
-    text-align: justify;
-    text-align-last: center;
-}
-
-.btn.large h3, .btn-link.large h3 {
-    line-height: var(--line-height-smaller);
-    margin: 0;
-    padding: 0;
-}
-
-/* Button Text Alignment */
-.btn.justify, .btn-link.justify {
-    text-align: center; /* !important; */
-    text-align-last: center; /* !important; */
-}
-
-.btn.large.full-block-btn, .btn-link.large.full-block-btn {
-    display: block;
-    text-align: justify;
-    text-align-last: center;
-    padding: 2em 1em;
-    margin: var(--margin-large) auto;
-}
-
-.btn.large.full-block-btn h3,
-.btn.large.full-block-btn p,
-.btn.large.full-block-btn span,
-.btn-link.large.full-block-btn h3,
-.btn-link.large.full-block-btn p,
-.btn-link.large.full-block-btn span {
-   color: var(--color-text-primary);
-}
-
-.btn.large h3, .btn-link.large h3 {
-    line-height: var(--line-height-smaller);
-    margin: 0;
-    padding: 0;
-}
-
-/* Button Text Alignment */
-.btn.justify, .btn-link.justify {
-    text-align: center; /* !important; */
-    text-align-last: center; /* !important; */
-}
-
-.btn.large.full-block-btn, .btn-link.large.full-block-btn {
-    display: block;
-    text-align: justify;
-    text-align-last: center;
-    padding: 2em 1em;
-    margin: var(--margin-large) auto;
-}
-
-.btn.large.full-block-btn h3,
-.btn.large.full-block-btn p,
-.btn.large.full-block-btn span,
-.btn-link.large.full-block-btn h3,
-.btn-link.large.full-block-btn p,
-.btn-link.large.full-block-btn span {
-   color: var(--color-text-primary);
-}
-
-/* Ensure button hover styles still apply */
-.btn.large.full-block-btn:hover, .btn-link.large.full-block-btn:hover {
-    background: var(--color-background-darker);
-}
-
-/* ---------------------------- // ---------------------------- */
-header, nav, footer {
-    background-color: var(--color-background-medium);
-    color: var(--color-text-secondary);
-    padding: var(--padding-smaller) var(--padding-base) var(--padding-base);
-    margin: var(--margin-base) auto;
-    margin-bottom: var(--margin-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text);
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
     text-align: center;
-    text-align-last: center;
-}
-
-header, .site-header {
-    font-size: 1.6em;
-    border-bottom: 2px solid var(--color-border-primary);
-}
-
-header #header, .site-header, .header-content,  .header-text, 
-.theme-toggle, {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-/* NAV */
-nav {
-    font-size: 0.7em;
-    padding: 0 auto;
-    margin: 0 auto;
-}
-
-/* Remove extra padding/margin from nav links */
-nav ul {
-    padding: 0;
-    margin: 0;
-    list-style: none; /* Ensures no bullets appear */
-    display: flex; /* Aligns links horizontally */
-}
-
-nav ul li {
-    margin: 0; /* Remove extra margin */
-    padding: 0; /* Remove extra padding */
-}
-
-nav ul li a {
-    display: inline-block; /* Prevents full-block height issue */
-    padding: 10px 15px; /* Adjusts spacing */
-    text-decoration: none; /* Removes underline */
-}
-
-/* FOOTER */
-footer {
-    margin-top: 2em;
-    border-top: 2px solid var(--color-border-primary);
-    padding: 1em;
-}
-
-footer nav {
-    font-size: 0.7em;
-    padding: 0 auto;
-    margin: 0 auto;
-}
-
-footer img {
-    margin: 0.5em;
-}
-
-/* Footer Text Alignment */
-footer, footer nav, .footer-content, .footer-content ul, .footer-content li, footer .btn {
-    text-align: center;
-    text-align-last: center;
-}
-
-footer #footer, .footer-content, footer p.footer-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.theme-toggle img {
-    margin: 0.5em auto;
-}
-
-/* Ensure any buttons inside footer nav are also centered */
-footer .site-nav li a {
-    text-align: center;
-    text-align-last: center;
-    display: inline-block;
-}
-
-/* Center list items and buttons inside nav and footer */
-.site-nav ul, .site-nav li, .footer-content ul, .footer-content li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.site-nav li a, .footer-content li a {
-    display: inline-block;
-    text-align: center;
-    text-align-last: center;
-}
-
-.site-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5em;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* Center entire header and footer contents */
-.site-header, footer, .footer-content, footer nav, .site-nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    text-align-last: center;
-}
-
-/* ---------------------------- // ---------------------------- */
-.highlighted-section {
-    background-color: var(--color-background-medium);
-    color: var(--color-text-secondary);
-    margin: 1em 0 0.5em;
-    padding: 2em 1em;
-    border-top: 2px solid var(--color-border-primary);
-    border-bottom: 2px solid var(--color-border-primary);
-    font-size: 1em;
-    text-align: justify;
-    text-align-last: left;
-}
-
-.highlighted-section h3 {
-    line-height: Var(--line-height-small);
-    margin: 0;
-    padding: 0;
-}
-
-.highlighted-section a {
-    background-color: var(--color-background-dark);
-    color: var(--color-text-primary);
-    display: block;
-    margin: 0.5em 1em;
-    border: 2px solid var(--color-border-primary);
-    border-radius: 5px;
-    padding: 0.8em 1.2em;
+    text-decoration: none;
+    padding: var(--spacing-small) var(--spacing-medium);
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.highlighted-section a:hover {
-    background-color: var(--color-background-darker);
+.button:hover {
+    background-color: var(--color-accent-hover);
+}
+
+/* Button Sizes */
+.button-small {
+    font-size: calc(var(--font-size-base) * 0.875);
+    padding: var(--spacing-small);
+}
+
+.button-wide {
+    width: 100%;
+    padding: var(--spacing-small) var(--spacing-large);
+}
+
+.button-box {
+    width: 150px;
+    height: 150px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ---------------------------- // ---------------------------- */
-.site-nav, .nav-list {
-    background-color: var(--color-background-medium);
-    line-height:var(--line-height-base);
-    padding: 0;
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-medium);
+    padding: var(--spacing-medium) 0;
 }
 
-.site-nav ul {
+.nav a {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    text-decoration: none;
+    padding: var(--spacing-small);
+}
+
+.nav a:hover {
+    color: var(--color-accent-hover);
+}
+
+/* ---------------------------- // ---------------------------- */
+.section {
+    padding: var(--spacing-large) var(--spacing-medium);
+    margin-bottom: var(--spacing-large);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+.section-highlighted {
+    background-color: var(--color-highlight);
+    color: var(--color-text);
+}
+
+/* ---------------------------- // ---------------------------- */
+.disclaimer {
+    padding: var(--spacing-medium);
+    background-color: var(--color-background);
+    border-left: 4px solid var(--color-accent);
+    margin-bottom: var(--spacing-large);
+}
+
+.disclaimer .button-box {
+    margin-right: var(--spacing-medium);
+}
+
+.disclaimer .button-wide {
+    margin-top: var(--spacing-small);
+}
+
+/* ---------------------------- // ---------------------------- */
+.toc {
+    margin-bottom: var(--spacing-large);
+}
+
+.toc-list {
     list-style: none;
     padding: 0;
 }
 
-.site-nav li {
-    display: inline-block;
-    margin: 0.3em;
-    padding: 0.7em;
-    border: 1px solid var(--color-border-primary);
-    border-radius: 4px;
+.toc-list li {
+    margin-bottom: var(--spacing-small);
 }
 
-.site-nav li a {
-    background-color: var(--color-background-dark);
-    display: inline-block;
-    padding: 0.8em 1.2em;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+.toc-list a {
+    text-decoration: none;
+    color: var(--color-accent);
 }
 
-.site-nav li a:hover {
-    background-color: var(--color-background-darker);
+.toc-list a:hover {
+    color: var(--color-accent-hover);
 }
 
-/* Nav Text Alignment */
-.site-nav, .site-nav li, .site-nav li a,
-.nav-list, .nav-list li, .nav-list li a {
-    text-align: center;
-    text-align-last: center;
-}
-
-/* Center list items and buttons inside nav and footer */
-.site-nav ul, .site-nav li, .footer-content ul, .footer-content li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.site-nav li a, .footer-content li a {
-    display: inline-block;
-    text-align: center;
-    text-align-last: center;
-}
-
-/* Custom utility for return, rturn=list=link, disclaimer and contact blocks */
-
-.return-link, .disclaimer-link, .contact-link {
-    text-align: justify;
-    text-align-last: center;
-    padding: 1em;
-}
-
-/* Ensure headings stay centered */
-.return-link h3, .disclaimer-link h3, .contact-link h3, .return-list-link h3 {
-    font-weight: var(--font-weight-normal);
-    text-align: center;
-    text-align-last: center;
-}
-
-.return-list-link {
-    font-size: var(--font-size-small);
-    font-weight: var(--font-weigt-light);
-    text-align: center;
-    margin: 0.4rem auto;
-    padding: 0.3rem
-}
-
-.return-link p, .return-list-link p {
-    text-align: center;
-    text-align-last: center; 
-} 
-
-.return-link .btn, .return-list-link .btn, .disclaimer-link .btn, .contact-link .btn {
-    display: block;
-    margin: 1em auto;
-    text-align: justify;
-    text-align-last: left;
-}
-
-/* ---------------------------- // ---------------------------- */
-section {
-    margin-bottom: 2em;
-}
-
-/* Ahout & Authors */
-.about, .authors {
-    background: var(--color-background-light);
-    font-weight: var(--font-weight-semibold); 
-    margin: var(--margin-large);
-    margin-top: var(--margin-base);
-    border-radius: var(--border-radius-base);
-    padding: var(--padding-base);
-    text-align: justify;
-    text-align-last: left;
-}
-
-.authors p {
-    font-weight: var(--font-weight-normal);
-    margin: var(--margin-small) auto;
-    text-align: center;
-    text-align-last: center;
-}
-
-/* Guide, Overview, Summary, etc. */
-.guide, .overview, .introduction,
-.insights, .summary, .conclusion,
-.glossary, .references, .further-reading {
-    background: var(--color-background-light);
-    padding: 1.5em;
-    border-radius: 5px;
-    margin-bottom: 2em;
-}
-
-.guide, .insights, .summary, 
-.glossary, .references, .further-reading {
-    text-align: justify;
-    text-align-last: left;
-}
-
-/* Takeaways Special Styling */
-.insights ul {
-    list-style-type: disc;
-}
-
-/* Glossary Styling */
-.glossary dl {
-    margin: 0;
-}
-
-.glossary dt {
-    font-weight: bold;
-}
-
-.glossary dd {
-    margin: 0 0 1em 1em;
-}
-
-/* ---------------------------- // ---------------------------- */
-/* Index Page Layout */
-.index-page, .index-list, .index-list li {
-    background-color: var(--color-background-light);
-    color: var(--color-text-primary);
-    max-width: 600px;
-    margin: var(--margin-base) auto;
-    border: 1px solid var(--color-border-primary);
-    border-radius: var(--border-radius-base);
-    padding: 0.5em 1.2em 0em 1.2em;
-    font-size: var(--font-size-small);
-    text-align: center;
-    text-align-last: center;
-}
-
-.index-list li {
-    display: block;
-    margin: var(--margin-base);
-    padding: 0.7em;
-    border-radius: 5px;
-    padding: 0.8em 1.2em;
-    transition: background-color 0.3s ease;
-}
-
-.index-list li a {
-    border-radius: var(--border-radius-base);
-}
-
-.index-list li a:hover {
-    background-color: var(--color-background-darker);
-}
-
-/* Disclaimer Page Layout */
-.disclaimer-page {
-    background-color: var(--color-background-light);
-    color: var(--color-text-primary);
-    max-width: 800px;
-    margin: 0 auto;
-    border-radius: 4px;
-    border: 1px solid var(--color-text-primary);
-    padding: 1em;
-    font-size: 1.1em;
-    text-align: justify;
-    text-align-last: left;
-}
-
-/* Article Layouts */
-.article-white-paper, .article-essay, .article-guide {
-    background-color: var(--color-background-light);
-    color: var(--color-text-primary);
-    max-width: 800px;
-    margin: 0 auto;
-    border: 1px solid var(--color-text-primary);
-    border-radius: var(--border-radius-small);
-    padding: 1em;
-    font-size: var(--font-size-medium);
-}
-
-.article-white-paper {
-    padding: 2em;
-    border-radius: var(--border-radius-base);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: justify;
-    text-align-last: left;
-}
-
-/* Center these specific sections */
-.toc-btn, .overview, .conclusion, .image,
-.image, img, figure, figcaption {
-    text-align: center;
-    text-align-last: center;
-}
-
-.toc-btn {
-   font-size: var(--font-size-large);
-}
-
-/* Border and padding similar to table styling */
-#image figure {
-    background-color: var(--color-background-medium);
-    display: inline-block;
-    max-width: 100%;
-    display: inline-block;
-    border: 1px solid var(--color-border-primary);
-    border-radius: var(--border-radius-base);
-    padding: var(--padding-base);
-}
-
-#image img {
-    max-width: 100%;
-    height: auto;
-    margin: 0 auto;
-}
-
-#image figcaption {
-    color: var(--color-text-muted);
-    font-style: italic;
-    margin-top: var(--margin-small);
-    text-align: center;
-    text-align-last: center;
+.toc-buttons .button-wide {
+    margin-bottom: var(--spacing-small);
 }
 
 /* ---------------------------- // ---------------------------- */
