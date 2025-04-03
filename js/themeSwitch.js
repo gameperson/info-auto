@@ -5,7 +5,7 @@ function initThemeSwitch() {
             document.body.classList.toggle('dark-mode');
             updateThemeIcon();
         });
-        updateThemeIcon(); // Initial icon setup
+        updateThemeIcon();
     }
 }
 
