@@ -1,14 +1,12 @@
 [
     {
-        "title": "Introduction to Modular Design",
-        "date": "2025-03-29",
-        "author": "GamePerson",
-        "content": "This is an introduction to modular design principles for web development..."
+        "title": "Example Markdown Article",
+        "fileName": "example",
+        "fileType": "md"
     },
     {
-        "title": "Cheat Sheet for Web Performance",
-        "date": "2025-03-28",
-        "author": "GamePerson",
-        "content": "This cheat sheet covers important web performance optimizations..."
+        "title": "Example Text Article",
+        "fileName": "example",
+        "fileType": "txt"
     }
 ]
