@@ -5,19 +5,44 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadTemplates() {
-    // ... (same as before)
+    fetch('templates/meta.html')
+        .then(response => response.text())
+        .then(meta => {
+            document.getElementById('meta').innerHTML = meta;
+        }).catch((error) => console.error("meta error", error));
+
+    fetch('templates/header.html')
+        .then(response => response.text())
+        .then(header => {
+            document.getElementById('header').innerHTML = header;
+            loadThemeSwitch('theme-switch-header');
+        }).catch((error) => console.error("header error", error));
+
+    fetch('templates/footer.html')
+        .then(response => response.text())
+        .then(footer => {
+            document.getElementById('footer').innerHTML = footer;
+            loadThemeSwitch('theme-switch-footer');
+        }).catch((error) => console.error("footer error", error));
 }
 
 function loadThemeSwitch(elementId) {
-    // ... (same as before)
+    fetch('templates/theme_switch.html')
+        .then(response => response.text())
+        .then(themeSwitch => {
+            document.getElementById(elementId).innerHTML = themeSwitch;
+            initThemeSwitch();
+        }).catch((error) => console.error("theme switch error", error));
 }
 
 function loadIndexArticles() {
     fetch('pages/articles.json')
         .then(response => response.json())
         .then(articles => {
-            const articleListItems = document.getElementById('article-list-items');
-            if (articleListItems) {
+            const articleListToc = document.getElementById('article-list-toc');
+            if (articleListToc) {
+                articleListToc.innerHTML = '<ul></ul>';
+                const articleListItems = articleListToc.querySelector('ul');
                 articles.forEach(article => {
                     const listItem = document.createElement('li');
                     const link = document.createElement('a');
@@ -31,7 +56,7 @@ function loadIndexArticles() {
                     articleListItems.appendChild(listItem);
                 });
             } else {
-                console.error("article-list-items element not found!");
+                console.error("article-list-toc element not found!");
                 showError("Error: Article list element not found.");
             }
         })
@@ -51,12 +76,22 @@ function loadToc() {
         .then(response => response.text())
         .then(toc => {
             document.getElementById('table-of-contents').innerHTML = toc;
+        }).catch((error) => console.error("toc error", error));
+}
+
+/*
+function loadToc() {
+    fetch('templates/toc.html')
+        .then(response => response.text())
+        .then(toc => {
+            document.getElementById('table-of-contents').innerHTML = toc;
         })
         .catch(error => {
             console.error('Error loading toc template:', error);
             document.getElementById('table-of-contents').innerHTML = '<p>Failed to load table of contents.</p>';
         });
 }
+*/
 
 function loadIndexDisclaimerLink() {
     const disclaimerLinkDiv = document.getElementById('index-disclaimer-link');
