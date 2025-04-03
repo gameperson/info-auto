@@ -14,7 +14,7 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
-    line-height: 1.7;
+    line-height: 1.75;
     padding: 20px;
     background-color: #f4f4f4; /* Default background */
     color: #333; /* Default text color */
@@ -478,7 +478,7 @@ footer .site-nav li a {
 }
 
 .highlighted-section h3 {
-    line-height: 1.3;
+    line-height: Var(--line-height-small);
     margin: 0;
     padding: 0;
 }
