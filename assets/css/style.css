@@ -3,6 +3,7 @@ body {
     margin: 20px;
     background-color: white;
     color: black;
+    line-height: 1.6;
 }
 
 body.dark-mode {
@@ -27,4 +28,33 @@ body.dark-mode {
 
 #toc-list li {
     margin-bottom: 5px;
+}
+
+.site-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+}
+
+.index-title {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.index-subtitle {
+    font-size: 1.2em;
+    color: #666;
+}
+
+#article-content {
+    padding: 10px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
