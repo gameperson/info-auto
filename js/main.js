@@ -9,6 +9,10 @@ function loadTemplates() {
         .then(response => response.text())
         .then(meta => {
             document.getElementById('meta').innerHTML = meta;
+        })
+        .catch(error => {
+            console.error('Error loading meta template:', error);
+            showError('Failed to load meta template.');
         });
 
     fetch('templates/header.html')
@@ -16,6 +20,10 @@ function loadTemplates() {
         .then(header => {
             document.getElementById('header').innerHTML = header;
             loadThemeSwitch('theme-switch-header');
+        })
+        .catch(error => {
+            console.error('Error loading header template:', error);
+            showError('Failed to load header template.');
         });
 
     fetch('templates/footer.html')
@@ -23,6 +31,10 @@ function loadTemplates() {
         .then(footer => {
             document.getElementById('footer').innerHTML = footer;
             loadThemeSwitch('theme-switch-footer');
+        })
+        .catch(error => {
+            console.error('Error loading footer template:', error);
+            showError('Failed to load footer template.');
         });
 }
 
@@ -32,6 +44,10 @@ function loadThemeSwitch(elementId) {
         .then(themeSwitch => {
             document.getElementById(elementId).innerHTML = themeSwitch;
             initThemeSwitch();
+        })
+        .catch(error => {
+            console.error('Error loading theme switch template:', error);
+            showError('Failed to load theme switch template.');
         });
 }
 
@@ -49,6 +65,10 @@ function loadArticles() {
                 listItem.appendChild(link);
                 tocList.appendChild(listItem);
             });
+        })
+        .catch(error => {
+            console.error('Error loading articles.json:', error);
+            showError('Failed to load articles.');
         });
 }
 
@@ -81,4 +101,11 @@ function loadPage(fileName) {
             console.error('Error loading page:', error);
             contentDiv.innerHTML = '<p>Failed to load page.</p>';
         });
+}
+
+function showError(message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.innerHTML = `<p>${message}</p>`;
+    document.getElementById('content').innerHTML = '';
+    document.getElementById('content').appendChild(errorDiv);
 }
