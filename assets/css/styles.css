@@ -209,7 +209,7 @@ th, td {
 
 /* Code Blocks */
 pre, code {
-    background: var(--color-background-medium); /* Changed from --bg-alt */
+    background: var(--color-background-medium); 
     padding: var(--padding-base);
     display: block;
     overflow-x: auto;
@@ -501,7 +501,7 @@ footer .site-nav li a {
 /* ---------------------------- // ---------------------------- */
 .site-nav, .nav-list {
     background-color: var(--color-background-medium);
-    line-height: 1.2;
+    line-height:var(--line-height-base);
     padding: 0;
 }
 
