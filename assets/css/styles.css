@@ -164,7 +164,7 @@ h6 { font-size: 1.25em; font-weight: var(--font-weight-semibold); margin: var(--
 /* Paragraphs and Lists */
 p, ul, ol, li, table, dl { 
     margin-bottom: var(--margin-base);
-    line-height: var(--font-weight-semibold);
+    line-height: var(--line-height-base);
     text-align: justify; 
     text-align-last: left; 
 }
