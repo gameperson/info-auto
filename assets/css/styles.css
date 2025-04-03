@@ -94,6 +94,7 @@ body {
 :root {
     /* Font Families and Sizes */
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, Arial, sans-serif;
+    
     --font-size-base: 1rem;
     --font-size-small: 0.875rem;
     --font-size-medium: 1.1rem;
@@ -110,6 +111,7 @@ body {
     --margin-small: 0.5em;
     --margin-large: 1.5em;
     --margin-larger: 2em;
+
     --padding-base: 1em;
     --padding-small: 0.75em;
     --padding-smaller: 0.5em;
@@ -119,6 +121,7 @@ body {
     /* Borders and Line Heights */
     --border-radius-base: 5px;
     --border-radius-small: 4px;
+    
     --line-height-base: 1.75em;
     --line-height-small: 1.5em;
     --line-height-smaller: 1.2em;
@@ -256,7 +259,7 @@ figcaption {
 
 .divider.2, .section-divider.2 {
     border: 0 1px 0 1px solid var(--color-border-primary);
-    padding: 2px
+    padding: 2px;
 }
 
 /* ---------------------------- // ---------------------------- */
