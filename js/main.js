@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    loadTemplates();
+    loadArticles();
+    loadPageList();
+});
+
+function loadTemplates() {
     fetch('templates/meta.html')
         .then(response => response.text())
         .then(meta => {
@@ -9,28 +15,25 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.text())
         .then(header => {
             document.getElementById('header').innerHTML = header;
-            fetch('templates/theme_switch.html')
-                .then(response => response.text())
-                .then(themeSwitch => {
-                    document.getElementById('theme-switch-header').innerHTML = themeSwitch;
-                    initThemeSwitch();
-                });
+            loadThemeSwitch('theme-switch-header');
         });
 
     fetch('templates/footer.html')
         .then(response => response.text())
         .then(footer => {
             document.getElementById('footer').innerHTML = footer;
-            fetch('templates/theme_switch.html')
-                .then(response => response.text())
-                .then(themeSwitch => {
-                    document.getElementById('theme-switch-footer').innerHTML = themeSwitch;
-                    initThemeSwitch();
-                });
+            loadThemeSwitch('theme-switch-footer');
         });
+}
 
-    loadArticles();
-});
+function loadThemeSwitch(elementId) {
+    fetch('templates/theme_switch.html')
+        .then(response => response.text())
+        .then(themeSwitch => {
+            document.getElementById(elementId).innerHTML = themeSwitch;
+            initThemeSwitch();
+        });
+}
 
 function loadArticles() {
     fetch('pages/articles.json')
@@ -49,8 +52,33 @@ function loadArticles() {
         });
 }
 
-function loadContent(fileType, fileName) {
+function loadPageList() {
+    const pageListItems = document.getElementById('page-list-items');
+    const pages = [
+        { title: 'Disclaimer', fileName: 'disclaimer.html' }
+    ];
+
+    pages.forEach(page => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = page.title;
+        link.addEventListener('click', () => loadPage(page.fileName));
+        listItem.appendChild(link);
+        pageListItems.appendChild(listItem);
+    });
+}
+
+function loadPage(fileName) {
     const contentDiv = document.getElementById('content');
     contentDiv.innerHTML = 'Loading...';
-    loadContentFromFile(`pages/${fileName}.${fileType}`, contentDiv);
+    fetch(fileName)
+        .then(response => response.text())
+        .then(data => {
+            contentDiv.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading page:', error);
+            contentDiv.innerHTML = '<p>Failed to load page.</p>';
+        });
 }
