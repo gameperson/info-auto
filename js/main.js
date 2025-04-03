@@ -56,15 +56,22 @@ function loadArticles() {
         .then(response => response.json())
         .then(articles => {
             const tocList = document.getElementById('toc-list');
-            articles.forEach(article => {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = '#';
-                link.textContent = article.title;
-                link.addEventListener('click', () => loadContent(article.fileType, article.fileName));
-                listItem.appendChild(link);
-                tocList.appendChild(listItem);
-            });
+            if (tocList) {
+                articles.forEach(article => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = article.title;
+                    link.addEventListener('click', () => {
+                        loadContent(article.fileType, article.fileName);
+                    });
+                    listItem.appendChild(link);
+                    tocList.appendChild(listItem);
+                });
+            } else {
+                console.error("toc-list element not found!");
+                showError("Error: Table of contents element not found.");
+            }
         })
         .catch(error => {
             console.error('Error loading articles.json:', error);
