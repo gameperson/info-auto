@@ -23,8 +23,9 @@ body.dark-mode {
     flex: 0 0 200px;
     border: 1px solid #ddd;
     padding: 10px;
-    margin-left: 20px;
+ margin-right: 20px; 
 }
+
 #toc-list {
     list-style: none;
     padding: 0;
