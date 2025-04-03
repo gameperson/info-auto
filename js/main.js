@@ -1,34 +1,56 @@
-// main.js - Handles loading templates and setting up the page
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('templates/meta.html')
+        .then(response => response.text())
+        .then(meta => {
+            document.getElementById('meta').innerHTML = meta;
+        });
 
-document.addEventListener("DOMContentLoaded", function () {
-    loadTemplate("header", "templates/header.html");
-    loadTemplate("footer", "templates/footer.html");
-    loadTemplate("meta", "templates/meta.html", true);
+    fetch('templates/header.html')
+        .then(response => response.text())
+        .then(header => {
+            document.getElementById('header').innerHTML = header;
+            fetch('templates/theme_switch.html')
+                .then(response => response.text())
+                .then(themeSwitch => {
+                    document.getElementById('theme-switch-header').innerHTML = themeSwitch;
+                    initThemeSwitch();
+                });
+        });
 
-    // Load content dynamically if a page-specific dataset is present
-    if (document.body.dataset.page) {
-        loadContent(document.body.dataset.page);
-    }
+    fetch('templates/footer.html')
+        .then(response => response.text())
+        .then(footer => {
+            document.getElementById('footer').innerHTML = footer;
+            fetch('templates/theme_switch.html')
+                .then(response => response.text())
+                .then(themeSwitch => {
+                    document.getElementById('theme-switch-footer').innerHTML = themeSwitch;
+                    initThemeSwitch();
+                });
+        });
 
-    // Initialize theme switcher
-    if (typeof initializeThemeSwitcher === "function") {
-        initializeThemeSwitcher();
-    }
+    loadArticles();
 });
 
-// Function to load an HTML template into a specified element
-function loadTemplate(targetId, templatePath, insertBefore = false) {
-    fetch(templatePath)
-        .then(response => response.text())
-        .then(data => {
-            const target = document.getElementById(targetId);
-            if (target) {
-                if (insertBefore) {
-                    target.insertAdjacentHTML("beforebegin", data);
-                } else {
-                    target.innerHTML = data;
-                }
-            }
-        })
-        .catch(error => console.error(`Error loading template: ${templatePath}`, error));
+function loadArticles() {
+    fetch('pages/articles.json')
+        .then(response => response.json())
+        .then(articles => {
+            const tocList = document.getElementById('toc-list');
+            articles.forEach(article => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = '#';
+                link.textContent = article.title;
+                link.addEventListener('click', () => loadContent(article.fileType, article.fileName));
+                listItem.appendChild(link);
+                tocList.appendChild(listItem);
+            });
+        });
+}
+
+function loadContent(fileType, fileName) {
+    const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = 'Loading...';
+    loadContentFromFile(`pages/${fileName}.${fileType}`, contentDiv);
 }
