@@ -79,20 +79,6 @@ function loadToc() {
         }).catch((error) => console.error("toc error", error));
 }
 
-/*
-function loadToc() {
-    fetch('templates/toc.html')
-        .then(response => response.text())
-        .then(toc => {
-            document.getElementById('table-of-contents').innerHTML = toc;
-        })
-        .catch(error => {
-            console.error('Error loading toc template:', error);
-            document.getElementById('table-of-contents').innerHTML = '<p>Failed to load table of contents.</p>';
-        });
-}
-*/
-
 function loadIndexDisclaimerLink() {
     const disclaimerLinkDiv = document.getElementById('index-disclaimer-link');
     if (disclaimerLinkDiv) {
