@@ -104,8 +104,9 @@ function loadPage(fileName) {
 }
 
 function showError(message) {
+    console.log("showError called:", message); // Added console.log()
     const errorDiv = document.createElement('div');
     errorDiv.innerHTML = `<p>${message}</p>`;
-    document.getElementById('article-content').innerHTML = ''; // Changed to article-content
-    document.getElementById('article-content').appendChild(errorDiv); // Changed to article-content
+    document.getElementById('article-content').innerHTML = '';
+    document.getElementById('article-content').appendChild(errorDiv);
 }
