@@ -386,12 +386,33 @@ header #header, .site-header, .header-content,  .header-text,
     flex-direction: column;
 }
 
+/* NAV */
 nav {
     font-size: 0.7em;
     padding: 0 auto;
     margin: 0 auto;
 }
 
+/* Remove extra padding/margin from nav links */
+nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none; /* Ensures no bullets appear */
+    display: flex; /* Aligns links horizontally */
+}
+
+nav ul li {
+    margin: 0; /* Remove extra margin */
+    padding: 0; /* Remove extra padding */
+}
+
+nav ul li a {
+    display: inline-block; /* Prevents full-block height issue */
+    padding: 10px 15px; /* Adjusts spacing */
+    text-decoration: none; /* Removes underline */
+}
+
+/* FOOTER */
 footer {
     margin-top: 2em;
     border-top: 2px solid var(--color-border-primary);
