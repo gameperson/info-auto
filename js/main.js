@@ -106,6 +106,6 @@ function loadPage(fileName) {
 function showError(message) {
     const errorDiv = document.createElement('div');
     errorDiv.innerHTML = `<p>${message}</p>`;
-    document.getElementById('content').innerHTML = '';
-    document.getElementById('content').appendChild(errorDiv);
+    document.getElementById('article-content').innerHTML = ''; // Changed to article-content
+    document.getElementById('article-content').appendChild(errorDiv); // Changed to article-content
 }
