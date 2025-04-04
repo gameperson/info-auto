@@ -99,28 +99,11 @@ function createAnchorToc() {
 }
 
 /*
-function loadIndexDisclaimerLink() {
-    const disclaimerLinkDiv = document.getElementById('index-disclaimer-link');
-    if (disclaimerLinkDiv) {
-        const link = document.createElement('a');
-        link.href = '#';
-        link.textContent = 'Disclaimer';
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            loadDisclaimer();
-        });
-        disclaimerLinkDiv.appendChild(link);
-    } else {
-        console.error("index-disclaimer-link element not found!");
-    }
-}
-*/
-
 function loadDisclaimer() {
     loadArticleContent("md", "disclaimer");
 }
+*/
 
-/*
 function loadDisclaimer() {
     fetch('pages/disclaimer.md')
         .then(response => response.text())
@@ -139,7 +122,6 @@ function loadDisclaimer() {
             document.getElementById('article-content').innerHTML = '<p>Failed to load disclaimer.</p>';
         });
 }
-*/
 
 function attachFooterLinkListeners() {
     const footerDisclaimerLink = document.getElementById('footer-disclaimer-link');
