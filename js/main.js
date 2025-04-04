@@ -15,15 +15,118 @@ function loadTemplates() {
         .then(response => response.text())
         .then(header => {
             document.getElementById('header').innerHTML = header;
-            // initThemeSwitch(); // move the init function call to after the header and footer are loaded.
         }).catch((error) => console.error("header error", error));
 
     fetch('templates/footer.html')
         .then(response => response.text())
         .then(footer => {
             document.getElementById('footer').innerHTML = footer;
-            initThemeSwitch(); // Call initThemeSwitch here
+            initThemeSwitch(); // Call initThemeSwitch here, after footer load
         }).catch((error) => console.error("footer error", error));
 }
 
-// ... rest of the main.js file
+function loadIndexArticles() {
+    fetch('pages/articles.json')
+        .then(response => response.json())
+        .then(articles => {
+            const articleListToc = document.getElementById('article-list-toc');
+            if (articleListToc) {
+                articleListToc.innerHTML = '<ul></ul>';
+                const articleListItems = articleListToc.querySelector('ul');
+                articles.forEach(article => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = article.title;
+                    link.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        loadArticleContent(article.fileType, article.fileName);
+                    });
+                    listItem.appendChild(link);
+                    articleListItems.appendChild(listItem);
+                });
+            } else {
+                console.error("article-list-toc element not found!");
+                showError("Error: Article list element not found.");
+            }
+        })
+        .catch(error => {
+            console.error('Error loading articles.json:', error);
+            showError('Failed to load articles.');
+        });
+}
+
+function loadArticleContent(fileType, fileName) {
+    loadContent(fileType, fileName);
+    checkAndLoadToc();
+}
+
+function checkAndLoadToc() {
+    const articleContent = document.getElementById("article-content");
+    if(articleContent.querySelectorAll("h1, h2, h3, h4, h5, h6").length > 0){
+        loadToc();
+    } else {
+        document.getElementById("table-of-contents").innerHTML = "";
+    }
+}
+
+function loadToc() {
+    fetch('templates/toc.html')
+        .then(response => response.text())
+        .then(toc => {
+            document.getElementById('table-of-contents').innerHTML = toc;
+            createAnchorToc();
+        }).catch((error) => console.error("toc error", error));
+}
+
+function createAnchorToc() {
+    const headers = document.getElementById("article-content").querySelectorAll("h1, h2, h3, h4, h5, h6");
+    const tocList = document.getElementById("toc-list");
+    if(tocList){
+        tocList.innerHTML = "";
+        headers.forEach(header => {
+            const listItem = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = "#" + header.id;
+            link.textContent = header.textContent;
+            listItem.appendChild(link);
+            tocList.appendChild(listItem);
+        });
+    }
+}
+
+function loadIndexDisclaimerLink() {
+    const disclaimerLinkDiv = document.getElementById('index-disclaimer-link');
+    if (disclaimerLinkDiv) {
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = 'Disclaimer';
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            loadDisclaimer();
+        });
+        disclaimerLinkDiv.appendChild(link);
+    } else {
+        console.error("index-disclaimer-link element not found!");
+    }
+}
+
+function loadDisclaimer() {
+    fetch('disclaimer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('article-content').innerHTML = data;
+            document.getElementById('table-of-contents').innerHTML = ""; //clear toc
+        })
+        .catch(error => {
+            console.error('Error loading disclaimer:', error);
+            document.getElementById('article-content').innerHTML = '<p>Failed to load disclaimer.</p>';
+        });
+}
+
+function showError(message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.innerHTML = `<p>${message}</p>`;
+    document.getElementById('article-content').innerHTML = '';
+    document.getElementById('article-content').appendChild(errorDiv);
+}
