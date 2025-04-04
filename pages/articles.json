@@ -1,12 +1,12 @@
 [
     {
         "title": "Example Text Article",
-        "fileName": "example",
+        "fileName": "example-text",
         "fileType": "txt"
-    }
+    },
     {
         "title": "Example Markdown Article",
-        "fileName": "example",
+        "fileName": "example-markdown",
         "fileType": "md"
     },
     {
