@@ -68,7 +68,16 @@ function loadIndexArticles() {
 
 function loadArticleContent(fileType, fileName) {
     loadContent(fileType, fileName);
-    loadToc();
+    checkAndLoadToc();
+}
+
+function checkAndLoadToc() {
+    const articleContent = document.getElementById("article-content");
+    if(articleContent.querySelectorAll("h1, h2, h3, h4, h5, h6").length > 0){
+        loadToc();
+    } else {
+        document.getElementById("table-of-contents").innerHTML = "";
+    }
 }
 
 function loadToc() {
@@ -76,7 +85,24 @@ function loadToc() {
         .then(response => response.text())
         .then(toc => {
             document.getElementById('table-of-contents').innerHTML = toc;
+            createAnchorToc();
         }).catch((error) => console.error("toc error", error));
+}
+
+function createAnchorToc() {
+    const headers = document.getElementById("article-content").querySelectorAll("h1, h2, h3, h4, h5, h6");
+    const tocList = document.getElementById("toc-list");
+    if(tocList){
+        tocList.innerHTML = "";
+        headers.forEach(header => {
+            const listItem = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = "#" + header.id;
+            link.textContent = header.textContent;
+            listItem.appendChild(link);
+            tocList.appendChild(listItem);
+        });
+    }
 }
 
 function loadIndexDisclaimerLink() {
