@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadTemplates();
     loadIndexArticles();
-    loadIndexDisclaimerLink();
+    attachFooterLinkListeners();
 });
 
 function loadTemplates() {
@@ -98,6 +98,7 @@ function createAnchorToc() {
     }
 }
 
+/*
 function loadIndexDisclaimerLink() {
     const disclaimerLinkDiv = document.getElementById('index-disclaimer-link');
     if (disclaimerLinkDiv) {
@@ -113,7 +114,13 @@ function loadIndexDisclaimerLink() {
         console.error("index-disclaimer-link element not found!");
     }
 }
+*/
 
+function loadDisclaimer() {
+    loadArticleContent("md", "disclaimer");
+}
+
+/*
 function loadDisclaimer() {
     fetch('pages/disclaimer.md')
         .then(response => response.text())
@@ -131,6 +138,26 @@ function loadDisclaimer() {
             console.error('Error loading disclaimer:', error);
             document.getElementById('article-content').innerHTML = '<p>Failed to load disclaimer.</p>';
         });
+}
+*/
+
+function attachFooterLinkListeners() {
+    const footerDisclaimerLink = document.getElementById('footer-disclaimer-link');
+    if (footerDisclaimerLink) {
+        footerDisclaimerLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            loadDisclaimer();
+        });
+    } else {
+        console.error("Footer disclaimer link not found!");
+    }
+
+    const footerContactLink = document.querySelector('.footer-section h3:contains("About") + ul li a[href="#contact"]');
+    if (footerContactLink) {
+        footerContactLink.href = 'mailto:your-email@example.com'; // Replace with your actual email
+    }
+
+    // About Us link can remain as '#' for now if it's a placeholder
 }
 
 function showError(message) {
