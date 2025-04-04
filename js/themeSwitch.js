@@ -10,7 +10,7 @@ function initThemeSwitch() {
 }
 
 function updateThemeIcon(toggle) {
-    if (toggle) {
+    if (toggle) { // Add check to ensure toggle exists
         const isDarkMode = document.body.classList.contains('dark-mode');
         if (isDarkMode) {
             toggle.innerHTML = '<img src="assets/images/bulb.0.svg" alt="Light Mode" style="width: 30px;">';
