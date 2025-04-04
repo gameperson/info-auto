@@ -1,6 +1,16 @@
 function initThemeSwitch() {
     const themeToggle = document.querySelectorAll('#theme-toggle');
     themeToggle.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    });
+}
+
+/*
+function initThemeSwitch() {
+    const themeToggle = document.querySelectorAll('#theme-toggle');
+    themeToggle.forEach(toggle => {
         if (!toggle.dataset.listenerAdded) {
             toggle.addEventListener('click', () => {
                 document.body.classList.toggle('dark-mode');
