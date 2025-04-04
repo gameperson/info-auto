@@ -115,7 +115,22 @@ function loadIndexDisclaimerLink() {
 }
 
 function loadDisclaimer() {
-    loadArticleContent("md", "disclaimer");
+    fetch('pages/disclaimer.md')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('article-content').innerHTML = marked.parse(data);
+            document.getElementById('table-of-contents').innerHTML = "";
+            document.getElementById('table-of-contents').style.display = "none";
+            // Update footer disclaimer link (optional, if you want it to be a direct link to the loaded content)
+            const footerDisclaimerLink = document.getElementById('footer-disclaimer-link');
+            if (footerDisclaimerLink) {
+                footerDisclaimerLink.href = '#article-content'; // Example: link to the content area
+            }
+        })
+        .catch(error => {
+            console.error('Error loading disclaimer:', error);
+            document.getElementById('article-content').innerHTML = '<p>Failed to load disclaimer.</p>';
+        });
 }
 
 function showError(message) {
