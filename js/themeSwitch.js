@@ -1,9 +1,12 @@
 function initThemeSwitch() {
     const themeToggle = document.querySelectorAll('#theme-toggle');
     themeToggle.forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
+        if (!toggle.dataset.listenerAdded) {
+            toggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+            });
+            toggle.dataset.listenerAdded = true; // Mark that listener has been added
+        }
     });
 }
 
