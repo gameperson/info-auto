@@ -10,12 +10,25 @@ function initThemeSwitch() {
 }
 
 function updateThemeIcon(toggle) {
-    if (toggle) { // Add check to ensure toggle exists
+    if (toggle) {
         const isDarkMode = document.body.classList.contains('dark-mode');
-        if (isDarkMode) {
-            toggle.innerHTML = '<img src="assets/images/bulb.0.svg" alt="Light Mode" style="width: 30px;">';
+        const img = toggle.querySelector('img'); // Get the image element
+
+        if (img) { // Check if an image exists
+            if (isDarkMode) {
+                img.src = 'assets/images/bulb.0.svg';
+                img.alt = 'Light Mode';
+            } else {
+                img.src = 'assets/images/bulb.0.png';
+                img.alt = 'Dark Mode';
+            }
         } else {
-            toggle.innerHTML = '<img src="assets/images/bulb.0.png" alt="Dark Mode" style="width: 30px;">';
+            // Handle the case where there's no image (e.g., text button)
+            if (isDarkMode) {
+                toggle.textContent = 'Light Mode';
+            } else {
+                toggle.textContent = 'Dark Mode';
+            }
         }
     }
 }
