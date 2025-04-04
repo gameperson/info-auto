@@ -16,14 +16,13 @@ body.dark-mode {
 }
 
 #article-container {
-    display: flex;
+    display: block;
 }
 
 #table-of-contents {
-    flex: 0 0 200px;
     border: 1px solid #ddd;
     padding: 10px;
- margin-right: 20px; 
+    margin-bottom: 20px; 
 }
 
 #toc-list {
