@@ -1,0 +1,9 @@
+This is a simple text-based article.
+
+It demonstrates the ability of the site to load plain text content.
+
+Key points in this article:
+- Text loading functionality
+- Simplicity of plain text
+
+That's all for this example.
