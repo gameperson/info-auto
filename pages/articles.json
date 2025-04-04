@@ -1,12 +1,22 @@
 [
     {
+        "title": "Example Text Article",
+        "fileName": "example",
+        "fileType": "txt"
+    }
+    {
         "title": "Example Markdown Article",
         "fileName": "example",
         "fileType": "md"
     },
     {
-        "title": "Example Text Article",
-        "fileName": "example",
+        "title": "Introduction to AI",
+        "fileName": "sample-markdown",
+        "fileType": "md"
+    },
+    {
+        "title": "Another Example Article",
+        "fileName": "another-example",
         "fileType": "txt"
     }
 ]
