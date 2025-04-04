@@ -63,10 +63,13 @@ function loadArticleContent(fileType, fileName) {
 
 function checkAndLoadToc() {
     const articleContent = document.getElementById("article-content");
-    if(articleContent.querySelectorAll("h1, h2, h3, h4, h5, h6").length > 0){
+    const tocContainer = document.getElementById("table-of-contents");
+    if (articleContent.querySelectorAll("h1, h2, h3, h4, h5, h6").length > 0) {
         loadToc();
+        tocContainer.style.display = "block"; // Show TOC if headers exist
     } else {
-        document.getElementById("table-of-contents").innerHTML = "";
+        tocContainer.innerHTML = "";
+        tocContainer.style.display = "none"; // Hide TOC if no headers
     }
 }
 
@@ -116,7 +119,8 @@ function loadDisclaimer() {
         .then(response => response.text())
         .then(data => {
             document.getElementById('article-content').innerHTML = data;
-            document.getElementById('table-of-contents').innerHTML = ""; //clear toc
+            document.getElementById('table-of-contents').innerHTML = ""; // Clear TOC
+            document.getElementById('table-of-contents').style.display = "none"; // Hide TOC
         })
         .catch(error => {
             console.error('Error loading disclaimer:', error);
