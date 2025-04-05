@@ -1,4 +1,4 @@
-
+/*
 document.addEventListener('DOMContentLoaded', () => {
     loadTemplates();
     loadIndexArticles();
@@ -187,9 +187,9 @@ function showError(message) {
     document.getElementById('article-content').innerHTML = '';
     document.getElementById('article-content').appendChild(errorDiv);
 }
-/* end new code
+end new code */
 
-/*
+
 document.addEventListener('DOMContentLoaded', () => {
     loadTemplates();
     loadIndexArticles();
@@ -313,7 +313,7 @@ function loadDisclaimer() {
             document.getElementById('article-content').innerHTML = '<p>Failed to load disclaimer.</p>';
         });
 }
-** 8/
+** */
 
 function attachFooterLinkListeners() {
     const footerDisclaimerLink = document.getElementById('footer-disclaimer-link');
