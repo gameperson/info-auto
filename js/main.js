@@ -98,13 +98,11 @@ function createAnchorToc() {
     }
 }
 
-/*
 function loadDisclaimer() {
     loadArticleContent("md", "disclaimer");
 }
-*/
 
-function loadDisclaimer() {
+/* function loadDisclaimer() {
     fetch('pages/disclaimer.md')
         .then(response => response.text())
         .then(data => {
@@ -122,6 +120,7 @@ function loadDisclaimer() {
             document.getElementById('article-content').innerHTML = '<p>Failed to load disclaimer.</p>';
         });
 }
+*/
 
 function attachFooterLinkListeners() {
     const footerDisclaimerLink = document.getElementById('footer-disclaimer-link');
