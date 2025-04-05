@@ -1,8 +1,8 @@
 function loadContent(fileType, fileName) {
     const contentDiv = document.getElementById('article-content');
     contentDiv.innerHTML = 'Loading...';
-    const filePath = `pages/<span class="math-inline">\{fileName\}\.</span>{fileType}`;
-    // const filePath = `pages/${fileName}.${fileType}`;
+    // const filePath = `pages/<span class="math-inline">\{fileName\}\.</span>{fileType}`;
+    const filePath = `pages/${fileName}.${fileType}`;
 
     fetch(filePath)
         .then(response => response.text())
