@@ -162,6 +162,16 @@ function loadLegalContent() { // Renamed function
     document.getElementById('table-of-contents').style.display = "none";
 }
 
+function loadLegalContent() { // Renamed function
+    const indexArticleList = document.getElementById('index-article-list');
+    if (indexArticleList) indexArticleList.style.display = 'none';
+    const articleContainer = document.getElementById('article-container');
+    if (articleContainer) articleContainer.style.display = 'flex';
+    loadContent("md", "legal-content"); // Updated filename
+    document.getElementById('table-of-contents').innerHTML = "";
+    document.getElementById('table-of-contents').style.display = "none";
+}
+
 function attachFooterLinkListeners() {
     const footerDisclaimerLink = document.getElementById('footer-disclaimer-link');
     if (footerDisclaimerLink) {
