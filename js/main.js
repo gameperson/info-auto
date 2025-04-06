@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTemplates();
     loadIndexArticles();
     attachFooterLinkListeners();
+    attachHeaderLinkListeners(); // Attach header link listeners after templates load
 });
 
 function loadTemplates() {
@@ -15,6 +16,7 @@ function loadTemplates() {
         .then(response => response.text())
         .then(header => {
             document.getElementById('header').innerHTML = header;
+            attachHeaderLinkListeners(); // Attach header link listeners after header loads
         }).catch((error) => console.error("header error", error));
 
     fetch('templates/footer.html')
@@ -138,6 +140,26 @@ function attachFooterLinkListeners() {
     // About Us link can remain as '#' for now if it's a placeholder
 }
 
+function attachHeaderLinkListeners() {
+    const headerArticleListLink = document.getElementById('header-article-list-link');
+    if (headerArticleListLink) {
+        headerArticleListLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            showIndex(); // Show index when the article list link is clicked
+            scrollToElement('article-list-toc'); // Scroll to the top of the article list
+        });
+    } else {
+        console.error("Header article list link not found!");
+    }
+}
+
+function showIndex() {
+    const indexArticleList = document.getElementById('index-article-list');
+    if (indexArticleList) indexArticleList.style.display = 'block';
+    const articleContainer = document.getElementById('article-container');
+    if (articleContainer) articleContainer.style.display = 'none';
+}
+
 function showError(message) {
     const errorDiv = document.createElement('div');
     errorDiv.innerHTML = `<p>${message}</p>`;
@@ -147,4 +169,13 @@ function showError(message) {
 
 function scrollToTop() {
     window.scrollTo(0, 0);
+}
+
+function scrollToElement(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        console.error(`Element with ID ${elementId} not found!`);
+    }
 }
