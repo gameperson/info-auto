@@ -1,53 +1,3 @@
-/* new code?
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadTemplates();
-    loadIndexArticles();
-    attachFooterLinkListeners();
-    attachHeaderLinkListeners(); // New function call
-});
-
-function attachFooterLinkListeners() {
-    const footerDisclaimerLink = document.getElementById('footer-disclaimer-link');
-    if (footerDisclaimerLink) {
-        footerDisclaimerLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            loadDisclaimer();
-        });
-    } else {
-        console.error("Footer disclaimer link not found!");
-    }
-
-    const footerContactLink = document.querySelector('.footer-section h3:contains("About") + ul li a[href="#contact"]');
-    if (footerContactLink) {
-        footerContactLink.href = 'mailto:your-email@example.com'; // Replace with your actual email
-    }
-}
-
-function attachHeaderLinkListeners() {
-    const headerDisclaimerLink = document.getElementById('header-disclaimer-link');
-    if (headerDisclaimerLink) {
-        headerDisclaimerLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            loadDisclaimer();
-        });
-    } else {
-        console.error("Header disclaimer link not found!");
-    }
-}
-
-function loadDisclaimer() {
-    const indexArticleList = document.getElementById('index-article-list');
-    if (indexArticleList) indexArticleList.style.display = 'none'; // Hide index elements
-    const articleContainer = document.getElementById('article-container');
-    if (articleContainer) articleContainer.style.display = 'flex'; // Show article container
-    loadContent("md", "disclaimer");
-    document.getElementById('table-of-contents').innerHTML = "";
-    document.getElementById('table-of-contents').style.display = "none";
-}
-
-end new code */
-
 document.addEventListener('DOMContentLoaded', () => {
     loadTemplates();
     loadIndexArticles();
@@ -58,7 +8,7 @@ function loadTemplates() {
     fetch('templates/meta.html')
         .then(response => response.text())
         .then(meta => {
-            document.getElementById('meta').innerHTML = meta;
+            document.head.insertAdjacentHTML('beforeend', meta);
         }).catch((error) => console.error("meta error", error));
 
     fetch('templates/header.html')
@@ -148,20 +98,6 @@ function createAnchorToc() {
     }
 }
 
-//function loadDisclaimer() {
-//    loadArticleContent("md", "disclaimer");
-//}
-
-function loadLegalContent() { // Renamed function
-    const indexArticleList = document.getElementById('index-article-list');
-    if (indexArticleList) indexArticleList.style.display = 'none';
-    const articleContainer = document.getElementById('article-container');
-    if (articleContainer) articleContainer.style.display = 'flex';
-    loadContent("md", "legal-content"); // Updated filename
-    document.getElementById('table-of-contents').innerHTML = "";
-    document.getElementById('table-of-contents').style.display = "none";
-}
-
 function loadLegalContent() { // Renamed function
     const indexArticleList = document.getElementById('index-article-list');
     if (indexArticleList) indexArticleList.style.display = 'none';
@@ -173,11 +109,11 @@ function loadLegalContent() { // Renamed function
 }
 
 function attachFooterLinkListeners() {
-    const footerDisclaimerLink = document.getElementById('footer-disclaimer-link');
+    const footerDisclaimerLink = document.getElementById('index-disclaimer-link');
     if (footerDisclaimerLink) {
         footerDisclaimerLink.addEventListener('click', (event) => {
             event.preventDefault();
-            loadDisclaimer();
+            loadLegalContent();
         });
     } else {
         console.error("Footer disclaimer link not found!");
