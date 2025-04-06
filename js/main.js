@@ -22,6 +22,7 @@ function loadTemplates() {
         .then(footer => {
             document.getElementById('footer').innerHTML = footer;
             initThemeSwitch(); // Call initThemeSwitch here, after footer load
+            attachFooterLinkListeners(); // Re-attach footer link listeners after footer load
         }).catch((error) => console.error("footer error", error));
 }
 
@@ -59,6 +60,14 @@ function loadIndexArticles() {
 function loadArticleContent(fileType, fileName) {
     loadContent(fileType, fileName);
     checkAndLoadToc();
+    hideIndex(); // Hide index when an article is loaded
+}
+
+function hideIndex() {
+    const indexArticleList = document.getElementById('index-article-list');
+    if (indexArticleList) indexArticleList.style.display = 'none';
+    const articleContainer = document.getElementById('article-container');
+    if (articleContainer) articleContainer.style.display = 'flex';
 }
 
 function checkAndLoadToc() {
