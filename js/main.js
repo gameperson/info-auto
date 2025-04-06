@@ -61,6 +61,7 @@ function loadArticleContent(fileType, fileName) {
     loadContent(fileType, fileName);
     checkAndLoadToc();
     hideIndex(); // Hide index when an article is loaded
+    scrollToTop(); // Scroll to the top of the content when loaded
 }
 
 function hideIndex() {
@@ -115,17 +116,18 @@ function loadLegalContent() { // Renamed function
     loadContent("md", "legal-content"); // Updated filename
     document.getElementById('table-of-contents').innerHTML = "";
     document.getElementById('table-of-contents').style.display = "none";
+    scrollToTop(); // Scroll to the top of the content when loaded
 }
 
 function attachFooterLinkListeners() {
-    const footerDisclaimerLink = document.getElementById('index-disclaimer-link');
-    if (footerDisclaimerLink) {
-        footerDisclaimerLink.addEventListener('click', (event) => {
+    const footerLegalLink = document.getElementById('footer-legal-link');
+    if (footerLegalLink) {
+        footerLegalLink.addEventListener('click', (event) => {
             event.preventDefault();
             loadLegalContent();
         });
     } else {
-        console.error("Footer disclaimer link not found!");
+        console.error("Footer legal link not found!");
     }
 
     const footerContactLink = document.querySelector('.footer-section h3:contains("About") + ul li a[href="#contact"]');
@@ -141,4 +143,8 @@ function showError(message) {
     errorDiv.innerHTML = `<p>${message}</p>`;
     document.getElementById('article-content').innerHTML = '';
     document.getElementById('article-content').appendChild(errorDiv);
+}
+
+function scrollToTop() {
+    window.scrollTo(0, 0);
 }
