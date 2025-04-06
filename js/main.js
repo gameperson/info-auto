@@ -63,7 +63,7 @@ function loadArticleContent(fileType, fileName) {
     loadContent(fileType, fileName);
     checkAndLoadToc();
     hideIndex(); // Hide index when an article is loaded
-    scrollToTop(); // Scroll to the top of the content when loaded
+    scrollToElement('article-content'); // Scroll to the top of the article content when loaded
 }
 
 function hideIndex() {
@@ -118,7 +118,7 @@ function loadLegalContent() { // Renamed function
     loadContent("md", "legal-content"); // Updated filename
     document.getElementById('table-of-contents').innerHTML = "";
     document.getElementById('table-of-contents').style.display = "none";
-    scrollToTop(); // Scroll to the top of the content when loaded
+    scrollToElement('article-content'); // Scroll to the top of the content when loaded
 }
 
 function attachFooterLinkListeners() {
@@ -132,12 +132,26 @@ function attachFooterLinkListeners() {
         console.error("Footer legal link not found!");
     }
 
-    const footerContactLink = document.querySelector('.footer-section h3:contains("About") + ul li a[href="#contact"]');
-    if (footerContactLink) {
-        footerContactLink.href = 'mailto:your-email@example.com'; // Replace with your actual email
+    const footerTopLink = document.getElementById('footer-top-link');
+    if (footerTopLink) {
+        footerTopLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            scrollToElement('table-of-contents'); // Scroll to TOC if present
+        });
+    } else {
+        console.error("Footer top link not found!");
     }
 
-    // About Us link can remain as '#' for now if it's a placeholder
+    const footerIndexLink = document.getElementById('footer-index-link');
+    if (footerIndexLink) {
+        footerIndexLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            showIndex(); // Show the index
+            scrollToTop(); // Scroll to the top of the index
+        });
+    } else {
+        console.error("Footer index link not found!");
+    }
 }
 
 function attachHeaderLinkListeners() {
