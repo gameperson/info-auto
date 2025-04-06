@@ -12,7 +12,7 @@
         </div>
         <div class="return-link">
             <br>
-            <a href="javascript:history.back();" class="btn center" aria-label="Back">Back</a>
+            <a href="javascript:window.history.back();" class="btn center" aria-label="Back">Back</a>
         </div>
     </div>
     <!-- About & Contact -->
@@ -44,9 +44,11 @@
     <div class="footer-section footer-bottom">
         <div id="end">
             <ul>
-                <li><a href="javascript:history.back();">Back</a></li>
-                <li><a href="#">Top</a></li>
-                <li><a href="index.html">Index</a></li>
+                <li><a href="#" id="footer-top-link" class="btn" data-tags="Table of Contents, Introduction, Artoicle" aria-label="Content Top">Content Top</a></li>
+                <li><a href="#" id="footer-index-link" class="btn" data-tags="Site Index, Aticle List, Artoicles" aria-label="List of Avlaiable Articles">Article Index</a></li>
+                <li><a href="javascript:window.history.back();">Back</a></li>
+                <!-- <li><a href="index.html">Index Page</a></li>
+                 -->
             </ul>
         </div>
     </div>
