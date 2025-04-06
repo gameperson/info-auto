@@ -1,7 +1,10 @@
+// Function to load content based on file type and name
 function loadContent(fileType, fileName) {
     const contentDiv = document.getElementById('article-content');
+    const tocDiv = document.getElementById('table-of-contents');
     contentDiv.innerHTML = 'Loading...';
-    // const filePath = `pages/<span class="math-inline">\{fileName\}\.</span>{fileType}`;
+    tocDiv.innerHTML = '';
+
     const filePath = `pages/${fileName}.${fileType}`;
 
     fetch(filePath)
@@ -18,6 +21,18 @@ function loadContent(fileType, fileName) {
                 contentDiv.innerHTML = `<pre>${data}</pre>`;
             } else {
                 contentDiv.innerHTML = data;
+            }
+
+            // Populate TOC if anchors exist
+            const anchors = contentDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
+            if (anchors.length > 0) {
+                tocDiv.innerHTML = '<ul id="toc-list"></ul>';
+                const tocList = document.getElementById('toc-list');
+                anchors.forEach(anchor => {
+                    const tocItem = document.createElement('li');
+                    tocItem.innerHTML = `<a href="#${anchor.id}">${anchor.innerText}</a>`;
+                    tocList.appendChild(tocItem);
+                });
             }
         })
         .catch(error => {
