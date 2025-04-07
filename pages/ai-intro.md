@@ -28,5 +28,3 @@ AI is being used in numerous fields, such as:
 AI continues to evolve, promising significant advancements and challenges for the future.
 
 ---
-
-[View Site Disclaimer](#legal)
