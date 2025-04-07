@@ -10,14 +10,14 @@
         "fileType": "md"
     },
     {
-        "title": "Example Text Article",
-        "fileName": "example-text",
-        "fileType": "txt"
-    },
-    {
         "title": "Example Markdown Article",
         "fileName": "example-markdown",
         "fileType": "md"
+    },
+    {
+        "title": "Example Text Article",
+        "fileName": "example-text",
+        "fileType": "txt"
     },
     {
         "title": "Legal",
