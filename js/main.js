@@ -76,8 +76,9 @@ function hideIndex() {
 function checkAndLoadToc() {
     const articleContent = document.getElementById("article-content");
     const tocContainer = document.getElementById("table-of-contents");
-    if (articleContent.querySelectorAll("h1, h2, h3, h4, h5, h6").length > 0) {
-        loadToc();
+    const headers = articleContent.querySelectorAll("h1, h2, h3, h4, h5, h6");
+    if (headers.length > 0) {
+        loadToc(headers);
         tocContainer.style.display = "block"; // Show TOC if headers exist
     } else {
         tocContainer.innerHTML = "";
@@ -85,19 +86,9 @@ function checkAndLoadToc() {
     }
 }
 
-function loadToc() {
-    fetch('templates/toc.html')
-        .then(response => response.text())
-        .then(toc => {
-            document.getElementById('table-of-contents').innerHTML = toc;
-            createAnchorToc();
-        }).catch((error) => console.error("toc error", error));
-}
-
-function createAnchorToc() {
-    const headers = document.getElementById("article-content").querySelectorAll("h1, h2, h3, h4, h5, h6");
+function loadToc(headers) {
     const tocList = document.getElementById("toc-list");
-    if(tocList){
+    if (tocList) {
         tocList.innerHTML = "";
         headers.forEach(header => {
             const listItem = document.createElement("li");
@@ -107,15 +98,17 @@ function createAnchorToc() {
             listItem.appendChild(link);
             tocList.appendChild(listItem);
         });
+    } else {
+        console.error("TOC list element not found!");
     }
 }
 
-function loadLegalContent() { // Renamed function
+function loadLegalContent() {
     const indexArticleList = document.getElementById('index-article-list');
     if (indexArticleList) indexArticleList.style.display = 'none';
     const articleContainer = document.getElementById('article-container');
     if (articleContainer) articleContainer.style.display = 'flex';
-    loadContent("md", "legal-content"); // Updated filename
+    loadContent("md", "legal-content");
     document.getElementById('table-of-contents').innerHTML = "";
     document.getElementById('table-of-contents').style.display = "none";
     scrollToElement('article-content'); // Scroll to the top of the content when loaded
@@ -136,7 +129,7 @@ function attachFooterLinkListeners() {
     if (footerTopLink) {
         footerTopLink.addEventListener('click', (event) => {
             event.preventDefault();
-            scrollToElement('table-of-contents'); // Scroll to TOC if present
+            scrollToElement('article-content'); // Scroll to the top of the article content
         });
     } else {
         console.error("Footer top link not found!");
