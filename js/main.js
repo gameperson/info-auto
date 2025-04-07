@@ -26,6 +26,12 @@ function loadTemplates() {
             initThemeSwitch(); // Call initThemeSwitch here, after footer load
             attachFooterLinkListeners(); // Re-attach footer link listeners after footer load
         }).catch((error) => console.error("footer error", error));
+
+    fetch('templates/content.html')
+        .then(response => response.text())
+        .then(content => {
+            document.body.insertAdjacentHTML('beforeend', content);
+        }).catch((error) => console.error("content error", error));
 }
 
 function loadIndexArticles() {
@@ -60,10 +66,13 @@ function loadIndexArticles() {
 }
 
 function loadArticleContent(fileType, fileName) {
-    loadContent(fileType, fileName);
-    checkAndLoadToc();
-    hideIndex(); // Hide index when an article is loaded
-    scrollToElement('article-content'); // Scroll to the top of the article content when loaded
+    fetch(`pages/${fileName}.${fileType}`)
+        .then(response => response.text())
+        .then(content => {
+            document.getElementById('article-content').innerHTML = marked.parse(content);
+            hideIndex(); // Hide index when an article is loaded
+            scrollToElement('article-content'); // Scroll to the top of the article content when loaded
+        }).catch((error) => console.error("Error loading article content", error));
 }
 
 function hideIndex() {
@@ -71,38 +80,6 @@ function hideIndex() {
     if (indexArticleList) indexArticleList.style.display = 'none';
     const articleContainer = document.getElementById('article-container');
     if (articleContainer) articleContainer.style.display = 'flex';
-}
-
-function checkAndLoadToc() {
-    const articleContent = document.getElementById("article-content");
-    const tocContainer = document.getElementById("table-of-contents");
-    const headers = articleContent.querySelectorAll("h1, h2, h3, h4, h5, h6");
-    if (headers.length > 0) {
-        loadToc(headers);
-        tocContainer.style.display = "block"; // Show TOC if headers exist
-    } else {
-        tocContainer.innerHTML = "";
-        tocContainer.style.display = "none"; // Hide TOC if no headers
-    }
-}
-
-function loadToc(headers) {
-    const tocList = document.getElementById("toc-list");
-    if (tocList) {
-        tocList.innerHTML = "";
-        headers.forEach(header => {
-            if (header.previousElementSibling && header.previousElementSibling.tagName === "COMMENT" && header.previousElementSibling.nodeValue.trim() === "toc-entry") {
-                const listItem = document.createElement("li");
-                const link = document.createElement("a");
-                link.href = "#" + header.id;
-                link.textContent = header.textContent;
-                listItem.appendChild(link);
-                tocList.appendChild(listItem);
-            }
-        });
-    } else {
-        console.error("TOC list element not found!");
-    }
 }
 
 function loadLegalContent() {
