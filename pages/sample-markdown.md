@@ -29,4 +29,4 @@ AI continues to evolve, promising significant advancements and challenges for th
 
 ---
 
-[View Site Disclaimer](#disclaimer)
+[View Site Disclaimer](#legal)
