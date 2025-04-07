@@ -91,12 +91,14 @@ function loadToc(headers) {
     if (tocList) {
         tocList.innerHTML = "";
         headers.forEach(header => {
-            const listItem = document.createElement("li");
-            const link = document.createElement("a");
-            link.href = "#" + header.id;
-            link.textContent = header.textContent;
-            listItem.appendChild(link);
-            tocList.appendChild(listItem);
+            if (header.previousElementSibling && header.previousElementSibling.tagName === "COMMENT" && header.previousElementSibling.nodeValue.trim() === "toc-entry") {
+                const listItem = document.createElement("li");
+                const link = document.createElement("a");
+                link.href = "#" + header.id;
+                link.textContent = header.textContent;
+                listItem.appendChild(link);
+                tocList.appendChild(listItem);
+            }
         });
     } else {
         console.error("TOC list element not found!");
