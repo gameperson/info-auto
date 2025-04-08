@@ -89,7 +89,7 @@ function loadLegalContent() {
     if (indexArticleList) indexArticleList.style.display = 'none';
     const articleContainer = document.getElementById('article-container');
     if (articleContainer) articleContainer.style.display = 'flex';
-    loadContent("md", "legal-content");
+    loadContent("md", "legal");
     document.getElementById('table-of-contents').innerHTML = "";
     document.getElementById('table-of-contents').style.display = "none";
     scrollToElement('article-content'); // Scroll to the top of the content when loaded
