@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadIndexArticles();
     attachFooterLinkListeners();
     attachHeaderLinkListeners(); // Attach header link listeners after templates load
+    attachTopLinkListeners(); // Attach top link listeners after templates load
 });
 
 function loadTemplates() {
@@ -109,7 +110,7 @@ function attachFooterLinkListeners() {
     if (footerTopLink) {
         footerTopLink.addEventListener('click', (event) => {
             event.preventDefault();
-            scrollToElement('article-content'); // Scroll to the top of the article content
+            scrollToTop();
         });
     } else {
         console.error("Footer top link not found!");
@@ -138,6 +139,15 @@ function attachHeaderLinkListeners() {
     } else {
         console.error("Header article list link not found!");
     }
+}
+
+function attachTopLinkListeners() {
+    document.querySelectorAll('.btn[data-tags]').forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            scrollToElement('article-content');
+        });
+    });
 }
 
 function showIndex() {
