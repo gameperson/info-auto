@@ -1,3 +1,18 @@
+// toc.js
+
+function generateTOC() {
+    const toc = document.getElementById('toc');
+    const headers = document.querySelectorAll('#content h2');
+    toc.innerHTML = '<ul>';
+    headers.forEach(header => {
+        const tocItem = document.createElement('li');
+        tocItem.innerHTML = `<a href="#${header.id}">${header.textContent}</a>`;
+        toc.appendChild(tocItem);
+    });
+    toc.innerHTML += '</ul>';
+}
+
+/*
 document.addEventListener('DOMContentLoaded', () => {
     generateToc();
 });
