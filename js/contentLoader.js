@@ -1,42 +1,31 @@
-// Function to load content based on file type and name
-function loadContent(fileType, fileName) {
-    const contentDiv = document.getElementById('article-content');
-    const tocDiv = document.getElementById('table-of-contents');
-    contentDiv.innerHTML = 'Loading...';
-    tocDiv.innerHTML = '';
+// contentLoader.js
 
-    const filePath = `pages/${fileName}.${fileType}`;
-
-    fetch(filePath)
+function loadContent(fileName, fileType) {
+    fetch(`/pages/${fileName}.${fileType}`)
         .then(response => response.text())
         .then(data => {
-            if (filePath.endsWith('.md')) {
-                try {
-                    contentDiv.innerHTML = marked.parse(data);
-                } catch (error) {
-                    console.error('Error parsing markdown:', error);
-                    contentDiv.innerHTML = '<p>Error parsing markdown.</p>';
-                }
-            } else if (filePath.endsWith('.txt')) {
-                contentDiv.innerHTML = `<pre>${data}</pre>`;
-            } else {
-                contentDiv.innerHTML = data;
-            }
-
-            // Populate TOC if anchors exist
-            const anchors = contentDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
-            if (anchors.length > 0) {
-                tocDiv.innerHTML = '<ul id="toc-list"></ul>';
-                const tocList = document.getElementById('toc-list');
-                anchors.forEach(anchor => {
-                    const tocItem = document.createElement('li');
-                    tocItem.innerHTML = `<a href="#${anchor.id}">${anchor.innerText}</a>`;
-                    tocList.appendChild(tocItem);
-                });
+            document.getElementById('content').innerHTML = fileType === 'md' ? marked(data) : data;
+            if (fileType === 'md') {
+                generateTOC();
             }
         })
-        .catch(error => {
-            console.error('Error loading content:', error);
-            contentDiv.innerHTML = '<p>Failed to load content.</p>';
-        });
+        .catch(error => console.error('Error loading content:', error));
 }
+
+function loadArticles() {
+    fetch('/pages/articles.json')
+        .then(response => response.json())
+        .then(articles => {
+            const articleList = document.getElementById('article-list');
+            articleList.innerHTML = '';
+            articles.forEach(article => {
+                const listItem = document.createElement('li');
+                listItem.textContent = article.title;
+                listItem.onclick = () => loadContent(article.fileName, article.fileType);
+                articleList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.error('Error loading articles:', error));
+}
+
+document.addEventListener('DOMContentLoaded', loadArticles);
