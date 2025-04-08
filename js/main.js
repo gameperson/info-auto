@@ -71,11 +71,22 @@ function loadArticleContent(fileType, fileName) {
         .then(response => response.text())
         .then(content => {
             document.getElementById('article-content').innerHTML = marked.parse(content);
-            checkAndLoadToc();
+            generateTOC(); // Ensure TOC is generated after loading content
             hideIndex(); // Hide index when an article is loaded
             scrollToElement('article-content'); // Scroll to the top of the article content when loaded
         }).catch((error) => console.error("Error loading article content", error));
 }
+
+//function loadArticleContent(fileType, fileName) {
+//    fetch(`pages/${fileName}.${fileType}`)
+//        .then(response => response.text())
+//        .then(content => {
+//            document.getElementById('article-content').innerHTML = marked.parse(content);
+//            checkAndLoadToc();
+//            hideIndex(); // Hide index when an article is loaded
+//            scrollToElement('article-content'); // Scroll to the top of the article content when loaded
+//        }).catch((error) => console.error("Error loading article content", error));
+//}
 
 function hideIndex() {
     const indexArticleList = document.getElementById('index-article-list');
